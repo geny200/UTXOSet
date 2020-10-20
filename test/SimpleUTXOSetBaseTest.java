@@ -1,6 +1,7 @@
 import UTXOSet.ElementProof;
 import UTXOSet.UTXOSet;
 import org.junit.Test;
+
 import java.util.Random;
 
 import static org.junit.Assert.assertFalse;
@@ -31,8 +32,9 @@ public abstract class SimpleUTXOSetBaseTest {
         final String[] coins = new String[COINS_SIZE];
         final ElementProof[] proofs = new ElementProof[COINS_SIZE];
         final Random coinGen = new Random();
+
         for (int i = 0; i < COINS_SIZE; i++) {
-            coins[i] = (String.valueOf(coinGen.nextInt()));
+            coins[i] = Node.genCoin();
             proofs[i] = utxoSet.add(coins[i]);
             assertTrue(utxoSet.verify(proofs[i]));
         }

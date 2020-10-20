@@ -1,3 +1,5 @@
+package Example;
+
 import UTXOSet.*;
 
 import java.security.NoSuchAlgorithmException;

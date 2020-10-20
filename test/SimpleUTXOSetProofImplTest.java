@@ -7,27 +7,26 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SimpleUTXOSetProofImplTest extends SimpleUTXOSetBaseTest {
     private UTXOSetProof utxoSetProof;
-    private static String[] coins;
+    private static ArrayList<String> coins;
     private static final int AMOUNT_OF_COINS = 100;
     private final int AMOUNT_OF_TEST = 100;
 
     @BeforeClass
     public static void generateCoins() {
-        coins = new String[AMOUNT_OF_COINS];
-        Random coinGen = new Random();
-        for (int i = 0; i < AMOUNT_OF_COINS; i++) {
-            coins[i] = (String.valueOf(coinGen.nextInt()));
+        coins = new ArrayList<>();
+        for (int i = 0; i != AMOUNT_OF_COINS; ++i) {
+            coins.add(Node.genCoin());
         }
     }
 
@@ -36,44 +35,40 @@ public class SimpleUTXOSetProofImplTest extends SimpleUTXOSetBaseTest {
         try {
             utxoSet = new UTXOSetProofImpl();
             utxoSetProof = new UTXOSetProofImpl();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException ignore) {
+            fail();
         }
     }
 
     @Test
     public void saveAndGetProof() {
-        final List<Integer> order = IntStream
-                .range(0, AMOUNT_OF_COINS)
-                .boxed()
-                .collect(Collectors.toList());
-        for (int i = 0; i < AMOUNT_OF_TEST; i++) {
-            try {
+        try {
+            for (int i = 0; i < AMOUNT_OF_TEST; i++) {
                 utxoSet = new UTXOSetImpl();
                 utxoSetProof = new UTXOSetProofImpl();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            Collections.shuffle(order);
-            for(int coinPos : order) {
-                final String coin = coins[coinPos];
-                final ElementProof proof = utxoSetProof.add(coin);
-                utxoSet.add(coin);
-                utxoSetProof.saveProof(proof);
-            }
-            Collections.shuffle(order);
-            for(int coinPos : order) {
-                final String coin = coins[coinPos];
-                final ElementProof proof = utxoSetProof.getProof(coin);
 
-                assertTrue(utxoSetProof.verify(proof));
-                assertTrue(utxoSetProof.verifyAndDelete(proof));
-                assertFalse(utxoSetProof.verifyAndDelete(proof));
+                Collections.shuffle(coins);
+                for (String coin : coins) {
+                    utxoSetProof.addAndSave(coin);
+                    utxoSet.add(coin);
+                }
 
-                assertTrue(utxoSet.verify(proof));
-                assertTrue(utxoSet.verifyAndDelete(proof));
-                assertFalse(utxoSet.verifyAndDelete(proof));
+                Collections.shuffle(coins);
+                for (String coin : coins) {
+                    final ElementProof proof = utxoSetProof.getProof(coin);
+
+                    assertTrue(utxoSetProof.verify(proof));
+                    assertTrue(utxoSetProof.verifyAndDelete(proof));
+                    assertFalse(utxoSetProof.verifyAndDelete(proof));
+
+                    assertTrue(utxoSet.verify(proof));
+                    assertTrue(utxoSet.verifyAndDelete(proof));
+                    assertFalse(utxoSet.verifyAndDelete(proof));
+                }
             }
+
+        } catch (NoSuchAlgorithmException ignore) {
+            fail();
         }
     }
 }

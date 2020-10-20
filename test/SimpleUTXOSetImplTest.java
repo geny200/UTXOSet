@@ -1,5 +1,6 @@
 import UTXOSet.UTXOSetProofImpl;
 import org.junit.Before;
+
 import java.security.NoSuchAlgorithmException;
 
 public class SimpleUTXOSetImplTest extends SimpleUTXOSetBaseTest {
@@ -12,5 +13,4 @@ public class SimpleUTXOSetImplTest extends SimpleUTXOSetBaseTest {
             e.printStackTrace();
         }
     }
-
 }

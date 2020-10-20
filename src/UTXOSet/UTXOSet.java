@@ -17,16 +17,6 @@ public interface UTXOSet {
     ElementProof add(String coin);
 
     /**
-     * Adds array of wallet to UTXO set. It works the same as
-     * {@link UTXOSet#add(String)} for each item separately.
-     *
-     * @param coins - array {@link String} representation of
-     *              wallets data.
-     * @see UTXOSet#add(String)
-     */
-    void add(String[] coins);
-
-    /**
      * Verifies proof of the element's existence.
      *
      * @param proof - {@link ElementProof} the proof of the

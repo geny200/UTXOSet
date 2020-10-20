@@ -52,6 +52,23 @@ public class UTXOSetProofImpl extends UTXOSetImpl implements UTXOSetProof {
     }
 
     /**
+     * Adds an element to the tree and starts maintaining its
+     * proof correct. Works as {@code saveProof(add(coin))}
+     *
+     * @param coin - {@link String} representation of wallet
+     *             data.
+     * @return {@link ElementProof} proof of coin.
+     * @see UTXOSetProof#saveProof(ElementProof)
+     * @see UTXOSet#add(String)
+     */
+    @Override
+    public ElementProof addAndSave(String coin) {
+        ElementProof proof = add(coin);
+        saveProof(proof);
+        return proof;
+    }
+
+    /**
      * After calling this function, the structure ceases to
      * maintain the proof for this wallet.
      *

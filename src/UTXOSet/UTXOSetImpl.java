@@ -72,20 +72,6 @@ public class UTXOSetImpl implements UTXOSet {
     }
 
     /**
-     * Adds array of wallet to UTXO set. It works the same as
-     * {@link UTXOSet#add(String)} for each item separately.
-     *
-     * @param coins - array {@link String} representation of
-     *              wallets data.
-     * @see UTXOSet#add(String)
-     */
-    @Override
-    public void add(String[] coins) {
-        for (String coin : coins)   // trivial implementation
-            add(coin);              // TODO make an implementation
-    }
-
-    /**
      * Verifies proof of the element's existence.
      *
      * @param proof - {@link ElementProof} the proof of the
