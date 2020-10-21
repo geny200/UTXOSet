@@ -1,10 +1,13 @@
+import UTXOSet.ElementProof;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.IntStream;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+import static org.junit.Assert.*;
 
 public class NodeCommunicationTest {
     private final static int AMOUNT_OF_NODES = 10;
@@ -26,19 +29,48 @@ public class NodeCommunicationTest {
             if (i == from) {
                 continue;
             }
-            assertTrue(nodes[i].add(block));
+            if (block instanceof InvalidBlock) {
+                assertFalse(nodes[i].add(block));
+            } else {
+                assertTrue(nodes[i].add(block));
+            }
         }
     }
 
     @Test
-    public void testCommunication() {
+    public void sendingValidBlocks() {
         IntStream
-                .range(0, AMOUNT_OF_NODES)
-                .map(i -> i % AMOUNT_OF_NODES)
-                .boxed()
+                .range(0, AMOUNT_OF_NODES * AMOUNT_OF_NODES)
                 .forEach(nodePos -> {
-                    Block block = nodes[nodePos].generate();
-                    sendBlock(nodePos, block);
+                    final Block block = nodes[nodePos % AMOUNT_OF_NODES].generate();
+                    sendBlock(nodePos % AMOUNT_OF_NODES, block);
+                });
+    }
+    
+    @Test
+    public void sendingInvalidBlocks() {
+        final ArrayList<ElementProof> prevProofs = new ArrayList<>();
+        IntStream
+                .range(0, (AMOUNT_OF_NODES))
+                .forEach(nodePos -> {
+                    final Block validBlock = nodes[nodePos].generate();
+                    final ArrayList<ElementProof> invalidProofs = validBlock.getProofs();
+                    if(!invalidProofs.isEmpty()) {
+                        final Random posGenerator = new Random();
+                        final int proofPos = Math.abs(posGenerator.nextInt()) % invalidProofs.size();
+                        final ElementProof proof = invalidProofs.get(proofPos);
+                        if (!prevProofs.isEmpty()) {
+                            invalidProofs.remove(proofPos);
+                            invalidProofs.add(prevProofs.get(Math.abs(posGenerator.nextInt()) % prevProofs.size()));
+                            final Block invalidBlock = new InvalidBlock(validBlock.getCoinsNew(), invalidProofs);
+                            sendBlock(nodePos, invalidBlock);
+                        } else {
+                            sendBlock(nodePos, validBlock);
+                        }
+                        prevProofs.add(proof);
+                    } else {
+                        sendBlock(nodePos % AMOUNT_OF_NODES, validBlock);
+                    }
                 });
     }
 }

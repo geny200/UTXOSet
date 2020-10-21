@@ -24,7 +24,7 @@ public class SimpleUTXOSetProofImplTest extends SimpleUTXOSetBaseTest {
 
     @BeforeClass
     public static void generateCoins() {
-        coins = new ArrayList<>();
+        coins = new ArrayList<>(AMOUNT_OF_COINS);
         for (int i = 0; i != AMOUNT_OF_COINS; ++i) {
             coins.add(Node.genCoin());
         }

@@ -79,7 +79,7 @@ public class UTXOSetImpl implements UTXOSet {
      */
     @Override
     public boolean verify(ElementProof proof) {
-        if (proof.size() > rootList.size())
+        if (proof.size() >= rootList.size())
             return false;
         byte[] currentHash = leaf(proof.element());
 
