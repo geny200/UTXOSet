@@ -3,7 +3,6 @@ import UTXOSet.UTXOSetImpl;
 import UTXOSet.UTXOSetProof;
 import UTXOSet.UTXOSetProofImpl;
 import UTXOSet.UTXOSet;
-import UTXOSet.UTXOSetProof;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

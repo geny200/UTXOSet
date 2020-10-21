@@ -5,8 +5,6 @@ import org.junit.Test;
 import UTXOSet.UTXOSetImpl;
 import UTXOSet.UTXOSetProofImpl;
 
-import java.util.Random;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
