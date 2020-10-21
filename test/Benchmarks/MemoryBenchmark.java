@@ -5,11 +5,14 @@ import base.network.Node;
 import Benchmarks.naive.UTXOSetNaive;
 
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import static org.junit.Assert.fail;
 
 public class MemoryBenchmark {
-    private static final long SET_SIZE = 2_000_000;
+    private static final long SET_SIZE = 40_000_000;
     private static final Runtime runtime = Runtime.getRuntime();
 
     private static long getMemoryUsage() {
@@ -18,20 +21,23 @@ public class MemoryBenchmark {
     }
 
     private static String toMemory(long memory) {
-        String[] name = {" byte", " Kb", " Mb", " Gb"};
-        for (int i = 0; i != name.length - 1; ++i) {
-            if (memory < 1024)
-                return memory + name[i];
-            memory /= 1024;
+        String[] name = {"byte", "Kb", "Mb", "Gb"};
+        double mem = memory;
+        for (int i = 0; i != name.length; ++i) {
+            if (mem <= 1024)
+                return String.format("%.2f %s", mem, name[i]);
+            mem /= 1024;
         }
-        return memory + " Tb";
+        return String.format("%.2f Tb", mem);
     }
 
     private static void printResult(String className, long total) {
-        System.out.println("memory test - "
-                + className
-                + " (" + SET_SIZE + " elem): "
-                + toMemory(total) + ";"
+        DecimalFormat dF = new DecimalFormat("", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        System.out.format(
+                "memory test - %s (%s elem): %s;\n",
+                className,
+                dF.format(SET_SIZE),
+                toMemory(total)
         );
     }
 
