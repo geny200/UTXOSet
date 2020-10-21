@@ -1,4 +1,8 @@
+package base.network;
+
 import UTXOSet.ElementProof;
+import base.NodeCommunicationTest;
+import base.network.Block;
 
 import java.util.ArrayList;
 

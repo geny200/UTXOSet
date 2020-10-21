@@ -1,8 +1,11 @@
+package base;
+
 import UTXOSet.ElementProof;
 import UTXOSet.UTXOSetImpl;
 import UTXOSet.UTXOSetProof;
 import UTXOSet.UTXOSetProofImpl;
 import UTXOSet.UTXOSet;
+import base.network.Node;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,7 +57,7 @@ public class SimpleUTXOSetProofImplTest extends SimpleUTXOSetBaseTest {
 
     /**
      * Testing of {@link UTXOSetProofImpl} realization of {@link UTXOSetProof}.
-     *
+     * <p>
      * Verifies that after multiple additions we can access coins in different
      * order using saved proofs.
      */
