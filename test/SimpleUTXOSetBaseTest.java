@@ -2,15 +2,28 @@ import UTXOSet.ElementProof;
 import UTXOSet.UTXOSet;
 import org.junit.Test;
 
-import java.util.Random;
+import UTXOSet.UTXOSetImpl;
+import UTXOSet.UTXOSetProofImpl;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Base class for testing {@link UTXOSet} realizations.
+ *
+ * @author olegggatttor
+ * @see UTXOSetImpl
+ * @see UTXOSetProofImpl
+ */
 public abstract class SimpleUTXOSetBaseTest {
     protected final int COINS_SIZE = 100;
     protected UTXOSet utxoSet;
 
+    /**
+     * Simple test for addition to {@link UTXOSet} implementation.
+     *
+     * Verifies that the coin presents in set after addition.
+     */
     @Test
     public void singleAdd() {
         final String coin = "123456789";
@@ -18,6 +31,12 @@ public abstract class SimpleUTXOSetBaseTest {
         assertTrue(utxoSet.verify(proof));
     }
 
+    /**
+     * Simple test with addition and deletion to/from {@link UTXOSet} implementation.
+     *
+     * Verifies that the coin presents in set after addition and
+     * does not present after deletion.
+     */
     @Test
     public void singleAddThenDelete() {
         final String coin = "123456789";
@@ -27,11 +46,16 @@ public abstract class SimpleUTXOSetBaseTest {
         assertFalse(utxoSet.verify(proof));
     }
 
+    /**
+     * Complex test with addition and deletion of many coins to/from {@link UTXOSet} implementation.
+     *
+     * Verifies that coin presents in set after addition and
+     * does not present after deletion.
+     */
     @Test
     public void multipleInteractions() {
         final String[] coins = new String[COINS_SIZE];
         final ElementProof[] proofs = new ElementProof[COINS_SIZE];
-        final Random coinGen = new Random();
 
         for (int i = 0; i < COINS_SIZE; i++) {
             coins[i] = Node.genCoin();
