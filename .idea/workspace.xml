@@ -31,7 +31,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.SimpleUTXOSetImplTest">
+  <component name="RunManager" selected="JUnit.SimpleUTXOSetImplTest and 1 more">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -74,6 +74,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SimpleUTXOSetImplTest and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UTXOSet" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SimpleUTXOSetBaseTest" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="SimpleUTXOSetImplTest" />
+        <pattern testClass="SimpleUTXOSetProofImplTest" />
+      </patterns>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SimpleUTXOSetImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="UTXOSet" />
       <option name="PACKAGE_NAME" value="" />
@@ -83,22 +96,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SimpleUTXOSetProofImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="UTXOSet" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SimpleUTXOSetProofImplTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SimpleUTXOSetImplTest" />
+        <item itemvalue="JUnit.SimpleUTXOSetImplTest and 1 more" />
         <item itemvalue="JUnit.NodeCommunicationTest" />
+        <item itemvalue="JUnit.SimpleUTXOSetImplTest" />
         <item itemvalue="JUnit.NodeCommunicationTest.sendingValidBlocks" />
         <item itemvalue="JUnit.NodeCommunicationTest.sendingInvalidBlocks" />
-        <item itemvalue="JUnit.SimpleUTXOSetProofImplTest" />
       </list>
     </recent_temporary>
   </component>
