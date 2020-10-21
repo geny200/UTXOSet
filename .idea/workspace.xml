@@ -31,7 +31,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.NodeCommunicationTest">
+  <component name="RunManager" selected="JUnit.SimpleUTXOSetImplTest">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -94,11 +94,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SimpleUTXOSetImplTest" />
         <item itemvalue="JUnit.NodeCommunicationTest" />
         <item itemvalue="JUnit.NodeCommunicationTest.sendingValidBlocks" />
         <item itemvalue="JUnit.NodeCommunicationTest.sendingInvalidBlocks" />
         <item itemvalue="JUnit.SimpleUTXOSetProofImplTest" />
-        <item itemvalue="JUnit.SimpleUTXOSetImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -111,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603225334036</updated>
       <workItem from="1603225335679" duration="2769000" />
-      <workItem from="1603265144848" duration="4928000" />
+      <workItem from="1603265144848" duration="7096000" />
     </task>
     <servers />
   </component>
@@ -123,22 +123,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603266498697" />
-    <state width="914" height="280" key="GridCell.Tab.0.bottom" timestamp="1603269766720">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1603271535662">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603269766720" />
-    <state width="914" height="280" key="GridCell.Tab.0.center" timestamp="1603269766719">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603271535662" />
+    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1603271535662">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603269766719" />
-    <state width="914" height="280" key="GridCell.Tab.0.left" timestamp="1603269766719">
+    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603271535662" />
+    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1603271535662">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603269766719" />
-    <state width="914" height="280" key="GridCell.Tab.0.right" timestamp="1603269766719">
+    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603271535662" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1603271535662">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603269766719" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603271535662" />
     <state x="1144" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1603225412733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

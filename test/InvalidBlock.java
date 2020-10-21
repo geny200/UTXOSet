@@ -2,6 +2,13 @@ import UTXOSet.ElementProof;
 
 import java.util.ArrayList;
 
+/**
+ * Simulates invalid block for {@link NodeCommunicationTest}
+ *
+ * @author olegggatttor
+ * @see Block
+ * @see NodeCommunicationTest
+ */
 public class InvalidBlock extends Block {
     /**
      * Constructs Block by array of deleted coins with their

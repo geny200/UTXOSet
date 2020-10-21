@@ -9,10 +9,23 @@ import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class for testing and simulation communication between nodes in Bitcoin network.
+ * Class uses {@link Block} and {@link InvalidBlock} classes for testing of
+ * sending valid and invalid blocks.
+ *
+ * @author olegggatttor
+ * @see Node
+ * @see Block
+ * @see InvalidBlock
+ */
 public class NodeCommunicationTest {
     private final static int AMOUNT_OF_NODES = 10;
     private final static Node[] nodes = new Node[AMOUNT_OF_NODES];
 
+    /**
+     * Invokes before the first test for nodes initialization.
+     */
     @BeforeClass
     public static void init() {
         try {
@@ -24,6 +37,15 @@ public class NodeCommunicationTest {
         }
     }
 
+    /**
+     * Sends given {@link Block} to other nodes and asserts the expected result.
+     *
+     * Verifies if {@link Block} is accepted by other nodes and {@link InvalidBlock}
+     * is rejected.
+     *
+     * @param from - the position of sender in nodes array.
+     * @param block - block for sending.
+     */
     public void sendBlock(final int from, Block block) {
         for (int i = 0; i != AMOUNT_OF_NODES; ++i) {
             if (i == from) {
@@ -37,6 +59,10 @@ public class NodeCommunicationTest {
         }
     }
 
+    /**
+     * Testing of sending valid {@link Block} to other nodes. Simulates simple
+     * communication between nodes in Bitcoin network.
+     */
     @Test
     public void sendingValidBlocks() {
         IntStream
@@ -46,7 +72,12 @@ public class NodeCommunicationTest {
                     sendBlock(nodePos % AMOUNT_OF_NODES, block);
                 });
     }
-    
+
+    /**
+     * Testing of sending valid and invalid block between nodes in network.
+     * {@link InvalidBlock} must be rejected and {@link Block} must be
+     * accepted after verification.
+     */
     @Test
     public void sendingInvalidBlocks() {
         final ArrayList<ElementProof> prevProofs = new ArrayList<>();
