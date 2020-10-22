@@ -1,3 +1,5 @@
+package base;
+
 import UTXOSet.UTXOSetImpl;
 import UTXOSet.UTXOSet;
 import org.junit.Before;

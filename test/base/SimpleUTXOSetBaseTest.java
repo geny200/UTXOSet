@@ -1,5 +1,8 @@
+package base;
+
 import UTXOSet.ElementProof;
 import UTXOSet.UTXOSet;
+import base.network.Node;
 import org.junit.Test;
 
 import UTXOSet.UTXOSetImpl;
@@ -21,7 +24,7 @@ public abstract class SimpleUTXOSetBaseTest {
 
     /**
      * Simple test for addition to {@link UTXOSet} implementation.
-     *
+     * <p>
      * Verifies that the coin presents in set after addition.
      */
     @Test
@@ -33,7 +36,7 @@ public abstract class SimpleUTXOSetBaseTest {
 
     /**
      * Simple test with addition and deletion to/from {@link UTXOSet} implementation.
-     *
+     * <p>
      * Verifies that the coin presents in set after addition and
      * does not present after deletion.
      */
@@ -48,7 +51,7 @@ public abstract class SimpleUTXOSetBaseTest {
 
     /**
      * Complex test with addition and deletion of many coins to/from {@link UTXOSet} implementation.
-     *
+     * <p>
      * Verifies that coin presents in set after addition and
      * does not present after deletion.
      */

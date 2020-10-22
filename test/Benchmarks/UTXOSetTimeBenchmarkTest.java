@@ -1,57 +1,45 @@
 package Benchmarks;
 
-import UTXOSet.ElementProof;
-import UTXOSet.UTXOSet;
-import UTXOSet.UTXOSetImpl;
-import UTXOSet.UTXOSetProof;
-import UTXOSet.UTXOSetProofImpl;
+import UTXOSet.*;
+import base.network.Node;
+import Benchmarks.naive.UTXOSetNaive;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.fail;
 
 @State(Scope.Thread)
 public class UTXOSetTimeBenchmarkTest {
-    private static int COIN_ID = 0;
-    private static final Random random = new Random();
     private static final int SET_SIZE = 2_000_000;
 
-    final ArrayList<ElementProof> proofs = new ArrayList<>();
-    final ArrayList<String> coins = new ArrayList<>();
-    private UTXOSet utxoSet;
-    private UTXOSetProof utxoSetProof;
-    private NaiveUTXOSet naiveSet;
+    private ArrayList<String> coins;
+    private UTXOSet utxoLightSet;
+    private UTXOSetProof utxoProofSet;
+    private UTXOSetNaive utxoNaiveSet;
 
     public UTXOSetTimeBenchmarkTest() {
-    }
 
-    public static String genCoin() {
-        return ++COIN_ID + " " + random.nextInt();
     }
-
 
     @Setup
     public void setupCollections() {
+        coins = new ArrayList<>();
+
         try {
-            utxoSet = new UTXOSetImpl();
-            utxoSetProof = new UTXOSetProofImpl();
+            utxoNaiveSet = new UTXOSetNaive();
+            utxoLightSet = new UTXOSetImpl();
+            utxoProofSet = new UTXOSetProofImpl();
         } catch (NoSuchAlgorithmException ignored) {
-            System.out.println("ERROR");
-            return;
+            fail();
         }
-        naiveSet = new NaiveUTXOSet();
+
         for (int i = 0; i < SET_SIZE; i++) {
-            final String value = genCoin();
+            final String value = Node.genCoin();
             coins.add(value);
-            naiveSet.add(value);
-            utxoSet.add(value);
-            utxoSetProof.addAndSave(value);
-        }
-        for (String coin : coins) {
-            proofs.add(utxoSetProof.getProof(coin));
         }
     }
 
@@ -59,26 +47,39 @@ public class UTXOSetTimeBenchmarkTest {
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
     public void testUTXOSetImpl(Blackhole blackhole) {
-        for(ElementProof proof : proofs) {
-            blackhole.consume(utxoSet.verifyAndDelete(proof));
-        }
+        test(blackhole, utxoLightSet);
     }
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
     public void testUTXOSetProofImpl(Blackhole blackhole) {
-        for(ElementProof proof : proofs) {
-            blackhole.consume(utxoSetProof.verifyAndDelete(proof));
-        }
+        test(blackhole, utxoProofSet);
     }
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
     public void testNaiveUTXOSet(Blackhole blackhole) {
-        for(ElementProof proof : proofs) {
-            blackhole.consume(naiveSet.verifyAndDelete(proof.element()));
+        test(blackhole, utxoNaiveSet);
+    }
+
+    private void test(Blackhole blackhole, UTXOSet utxoSet) {
+        try {
+            UTXOSetProof utxoProof = new UTXOSetProofImpl();
+
+            for (String coin : coins) {
+                blackhole.consume(utxoSet.add(coin));
+                utxoProof.addAndSave(coin);
+            }
+
+            for (String coin : coins) {
+                ElementProof proof = utxoProof.getProof(coin);
+                blackhole.consume(utxoSet.verifyAndDelete(proof));
+                utxoProof.verifyAndDelete(proof);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            fail();
         }
     }
 }

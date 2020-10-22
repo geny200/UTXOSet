@@ -1,4 +1,9 @@
+package base;
+
 import UTXOSet.ElementProof;
+import base.network.Block;
+import base.network.InvalidBlock;
+import base.network.Node;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -39,11 +44,11 @@ public class NodeCommunicationTest {
 
     /**
      * Sends given {@link Block} to other nodes and asserts the expected result.
-     *
+     * <p>
      * Verifies if {@link Block} is accepted by other nodes and {@link InvalidBlock}
      * is rejected.
      *
-     * @param from - the position of sender in nodes array.
+     * @param from  - the position of sender in nodes array.
      * @param block - block for sending.
      */
     public void sendBlock(final int from, Block block) {
@@ -86,7 +91,7 @@ public class NodeCommunicationTest {
                 .forEach(nodePos -> {
                     final Block validBlock = nodes[nodePos].generate();
                     final ArrayList<ElementProof> invalidProofs = validBlock.getProofs();
-                    if(!invalidProofs.isEmpty()) {
+                    if (!invalidProofs.isEmpty()) {
                         final Random posGenerator = new Random();
                         final int proofPos = Math.abs(posGenerator.nextInt()) % invalidProofs.size();
                         final ElementProof proof = invalidProofs.get(proofPos);

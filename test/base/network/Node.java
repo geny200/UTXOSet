@@ -1,3 +1,5 @@
+package base.network;
+
 import UTXOSet.ElementProof;
 import UTXOSet.UTXOSetProof;
 import UTXOSet.UTXOSetProofImpl;
@@ -34,7 +36,7 @@ public class Node {
      *
      * @throws NoSuchAlgorithmException - If SHA256 was not found.
      */
-    Node() throws NoSuchAlgorithmException {
+    public Node() throws NoSuchAlgorithmException {
         this.utxoSet = new UTXOSetProofImpl();
         this.myCoins = new ArrayDeque<>();
     }
@@ -45,7 +47,7 @@ public class Node {
      * @return {@link Block} generated data block.
      * @see Block
      */
-    Block generate() {
+    public Block generate() {
         ArrayList<ElementProof> blockProofs = new ArrayList<>();
         ArrayList<String> coinsAdd = new ArrayList<>();
 
@@ -79,7 +81,7 @@ public class Node {
      * @param block - the {@link Block} to be verified.
      * @return True if the block was verified, false otherwise.
      */
-    boolean add(Block block) {
+    public boolean add(Block block) {
         for (ElementProof item : block.getProofs()) {
             if (!utxoSet.verifyAndDelete(item))
                 return false;
