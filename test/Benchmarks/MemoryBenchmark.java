@@ -18,7 +18,7 @@ public class MemoryBenchmark {
         }
         printResult("Naive memory in Kb after init: ");
         naiveset = null;
-        printResult("Light memory in Kb before init: ");
+        printResult("Light UTXOSet memory in Kb before init: ");
         UTXOSet utxoSet;
         try {
             utxoSet = new UTXOSetImpl();
@@ -30,8 +30,7 @@ public class MemoryBenchmark {
         }
         printResult("Light UTXOSet memory in Kb after init: ");
         utxoSet = null;
-        System.gc();
-        printResult("Proof memory in Kb before init: ");
+        printResult("Proof UTXOSet memory in Kb before init: ");
         UTXOSetProof utxoSetProof;
         try {
             utxoSetProof = new UTXOSetProofImpl();
