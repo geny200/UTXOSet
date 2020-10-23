@@ -4,6 +4,13 @@ import UTXOSet.*;
 
 import java.util.HashSet;
 
+/**
+ * Naive {@link HashSet} implementation of {@link UTXOSet}.
+ *
+ * @author olegggatttor
+ *
+ * @see UTXOSet
+ */
 public class UTXOSetNaive implements UTXOSet {
     private final HashSet<String> coins;
 

@@ -12,19 +12,26 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Benchmarks' test class for {@link UTXOSetNaive}, {@link UTXOSetImpl}
+ * and {@link UTXOSetProofImpl} implementations.
+ *
+ * @author olegggatttor
+ * @author Geny200
+ */
 @State(Scope.Thread)
+@Warmup(iterations = 2, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 2, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 public class UTXOSetTimeBenchmarkTest {
     private static final int SET_SIZE = 2_000_000;
-
     private ArrayList<String> coins;
     private UTXOSet utxoLightSet;
     private UTXOSetProof utxoProofSet;
     private UTXOSetNaive utxoNaiveSet;
 
-    public UTXOSetTimeBenchmarkTest() {
-
-    }
-
+    /**
+     * Set up method.
+     */
     @Setup
     public void setupCollections() {
         coins = new ArrayList<>();
@@ -43,6 +50,11 @@ public class UTXOSetTimeBenchmarkTest {
         }
     }
 
+    /**
+     * Testing method for {@link UTXOSetImpl}.
+     *
+     * @param blackhole - argument for consumption.
+     */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
@@ -50,6 +62,11 @@ public class UTXOSetTimeBenchmarkTest {
         test(blackhole, utxoLightSet);
     }
 
+    /**
+     * Testing method for {@link UTXOSetProofImpl}.
+     *
+     * @param blackhole - argument for consumption.
+     */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
@@ -57,6 +74,11 @@ public class UTXOSetTimeBenchmarkTest {
         test(blackhole, utxoProofSet);
     }
 
+    /**
+     * Testing method for {@link UTXOSetNaive}.
+     *
+     * @param blackhole - argument for consumption.
+     */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.SECONDS)
