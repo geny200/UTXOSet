@@ -23,7 +23,7 @@ import static org.junit.Assert.fail;
  * @see UTXOSetNaive
  */
 public class MemoryBenchmark {
-    private static final long SET_SIZE = 40_000_000;
+    private static final long SET_SIZE = 20_000_000;
     private static final Runtime runtime = Runtime.getRuntime();
 
     /**
@@ -96,8 +96,8 @@ public class MemoryBenchmark {
         try {
 
             test(new UTXOSetNaive());
-            test(new UTXOSetImpl());
             test(new UTXOSetProofImpl());
+            test(new UTXOSetImpl());
 
         } catch (NoSuchAlgorithmException e) {
             fail();

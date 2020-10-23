@@ -5,6 +5,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import static org.junit.Assert.fail;
 
 /**
  * Main class for benchmark testing of {@link UTXOSet}
@@ -27,7 +28,7 @@ public class BenchmarkMain {
         try {
             new Runner(options).run();
         } catch (RunnerException ignored) {
-            return;
+            fail();
         }
     }
 }

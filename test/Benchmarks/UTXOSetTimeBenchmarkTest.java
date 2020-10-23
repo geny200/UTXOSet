@@ -20,6 +20,8 @@ import static org.junit.Assert.fail;
  * @author Geny200
  */
 @State(Scope.Thread)
+@Warmup(iterations = 2, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 2, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 public class UTXOSetTimeBenchmarkTest {
     private static final int SET_SIZE = 2_000_000;
     private ArrayList<String> coins;
