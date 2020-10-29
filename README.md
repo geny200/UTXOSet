@@ -1,8 +1,8 @@
 Realisation of UTXO Set:
 
-*@Author* [Geny200](https://github.com/geny200)
-*@Author* [Olegggatttor](https://github.com/olegggatttor)
-*@Author* [Danielto1404](
+*@Author [Geny200](https://github.com/geny200)
+*@Author [Olegggatttor](https://github.com/olegggatttor)
+*@Author [Danielto1404](https://github.com/Danielto1404)
 
 ### Realisation:
 + [Naive realisation](https://github.com/geny200/UTXOSet/blob/master/src/UTXOSet/UTXOSetImpl.java)
