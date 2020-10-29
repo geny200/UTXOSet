@@ -16,3 +16,5 @@
 
 ### Information:
 + [Slides about data structure](Utreexo.pptx)
++ [Habr (Russian)](https://habr.com/ru/post/456424/)
++ [Original article (English)](https://eprint.iacr.org/2019/611.pdf)
